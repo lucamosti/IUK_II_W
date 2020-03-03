@@ -20,7 +20,7 @@ public class BookController extends Controller {
     }
 
 
-    public Result books1(String q) {
+    public Result books(String q) {
 
         return ok("Alle Bücher zurückgeben.");
     }
@@ -30,7 +30,7 @@ public class BookController extends Controller {
         return ok("Buch hinzugefügt.");
     }
 
-    public Result update(long id) {
+    public Result update(long id, Http.Request request) {
 
         return ok("Buch wurde aktualisiert");
     }
