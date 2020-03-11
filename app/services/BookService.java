@@ -17,14 +17,14 @@ public interface BookService {
      * @param id book identifier
      * @return book with given identifier or {@code null}
      */
-    Book get(final Long id);
+    Book get(final int id);
 
     /**
      * Removes book with given identifier.
      * @param id book identifier
      * @return {@code true} on success  {@code false} on failure
      */
-    boolean delete(final Long id);
+    boolean delete(final int id);
 
     /**
      * Updates book with given identifier.

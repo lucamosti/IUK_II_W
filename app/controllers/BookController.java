@@ -1,52 +1,46 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import models.Book;
+import play.libs.Json;
 import play.mvc.*;
+import services.DefaultBookService;
 
-/**
- * This controller contains an action to handle HTTP requests
- * to the application's home page.
- */
 public class BookController extends Controller {
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
-    public Result index() {
+    DefaultBookService bookService;
 
-        return ok(views.html.index.render());
+    public BookController() {
+        bookService = new DefaultBookService();
     }
 
 
     public Result books(String q) {
-
-        return ok("Alle Bücher zurückgeben.");
+        if(q != null){
+            return ok(Json.toJson(bookService.search(q)));
+        }
+        else {
+            return ok(Json.toJson(bookService.get()));
+        }
     }
 
-    public Result add() {
-
-        return ok("Buch hinzugefügt.");
+    public Result get(int id) {
+        return ok(Json.toJson(bookService.get(id)));
     }
 
-    public Result update(long id, Http.Request request) {
-
-        return ok("Buch wurde aktualisiert");
+    public Result add(Http.Request request) {
+        JsonNode jsonBook = request.body().asJson();
+        Book book = Json.fromJson(jsonBook, Book.class);
+        return ok(Json.toJson(bookService.add(book)));
     }
 
-    public Result get(long id) {
-
-        return ok("Buch mit der ID 5 wird zurückgegeben.");
+    public Result update(Http.Request request) {
+        JsonNode jsonBook = request.body().asJson();
+        Book book = Json.fromJson(jsonBook, Book.class);
+        return ok(Json.toJson(bookService.update(book)));
     }
 
-    public Result search(String q) {
-
-        return ok("Buch mit Titel wird zurückgegeben.");
-    }
-
-    public Result delete(long id) {
-
-        return ok("Buch wird gelöscht.");
+    public Result delete(int id) {
+        return ok(Json.toJson(bookService.delete(id)));
     }
 }
