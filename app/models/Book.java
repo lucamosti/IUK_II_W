@@ -1,7 +1,15 @@
 package models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "book")
 public class Book {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String title;
     private String isbn13;
     private String isbn10;
@@ -10,7 +18,7 @@ public class Book {
     private int pages;
 
 
-    public Book(int id, String title, String isbn13, String isbn10, String description, String publisher, int pages) {
+    public Book(Long id, String title, String isbn13, String isbn10, String description, String publisher, int pages) {
         this.id = id;
         this.title = title;
         this.isbn13 = isbn13;
@@ -20,11 +28,15 @@ public class Book {
         this.pages = pages;
     }
 
-    public int getId() {
+    public Book() {
+        
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -10,5 +10,5 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 GET     /api/books                  controllers.BookController.books(q: String ?= null)
 POST    /api/books                  controllers.BookController.add(request: Request)
 PUT     /api/books              controllers.BookController.update(request: Request)
-GET     /api/books/:id              controllers.BookController.get(id: Integer)
-DELETE  /api/books/:id              controllers.BookController.delete(id: Integer)
+GET     /api/books/:id              controllers.BookController.get(id: Long)
+DELETE  /api/books/:id              controllers.BookController.delete(id: Long)
